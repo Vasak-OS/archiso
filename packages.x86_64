@@ -97,19 +97,22 @@ ipw2100-fw
 ipw2200-fw
 linux-atm
 
+## General
+lsscsi
+sg3_utils
+smartmontools
+usbutils
 
 # UNCHECKED
 
 alsa-utils
 arch-install-scripts
 archinstall
-
 bind-tools
 brltty
 broadcom-wl
 clonezilla
 cloud-init
-
 darkhttpd
 ddrescue
 dhclient
@@ -130,15 +133,12 @@ irssi
 iw
 iwd
 kitty-terminfo
-
 lftp
 libfido2
 libusb-compat
 livecd-sounds
-lsscsi
 mc
 memtest86+
-
 modemmanager
 nbd
 ndisc6
@@ -161,8 +161,6 @@ rsync
 rxvt-unicode-terminfo
 screen
 sdparm
-sg3_utils
-smartmontools
 sof-firmware
 squashfs-tools
 syslinux
@@ -174,7 +172,6 @@ tpm2-tss
 udftools
 usb_modeswitch
 usbmuxd
-usbutils
 vim
 virtualbox-guest-utils-nox
 vpnc
