@@ -66,10 +66,17 @@ grub-tools
 os-prober
 refind
 
+
+# HARDWARE
+
+## CPU
+amd-ucode
+intel-ucode
+
+
 # UNCHECKED
 
 alsa-utils
-amd-ucode
 arch-install-scripts
 archinstall
 b43-fwcutter
@@ -96,7 +103,6 @@ gpm
 gptfdisk
 grml-zsh-config
 hdparm
-intel-ucode
 ipw2100-fw
 ipw2200-fw
 irssi
