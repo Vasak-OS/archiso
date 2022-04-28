@@ -11,7 +11,6 @@ edk2-shell
 inetutils
 less
 linux-tkg-bmq
-linux-atm
 linux-firmware
 linux-firmware-marvell
 linux-tkg-bmq-headers
@@ -91,12 +90,19 @@ xorg-xrandr
 libva
 libva-utils
 
+## Network
+b43-fwcutter
+broadcom-wl-dkms
+ipw2100-fw
+ipw2200-fw
+linux-atm
+
+
 # UNCHECKED
 
 alsa-utils
 arch-install-scripts
 archinstall
-b43-fwcutter
 
 bind-tools
 brltty
@@ -120,8 +126,6 @@ gpm
 gptfdisk
 grml-zsh-config
 hdparm
-ipw2100-fw
-ipw2200-fw
 irssi
 iw
 iwd
