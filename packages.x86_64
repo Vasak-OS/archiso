@@ -37,6 +37,27 @@ vi
 systemd-sysvcompat
 systemd-resolvconf
 
+## Filesystem
+btrfs-progs
+dosfstools
+e2fsprogs
+exfatprogs
+f2fs-tools
+gvfs
+gvfs-afc
+gvfs-gphoto2
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+jfsutils
+lvm2
+mtools
+nfs-utils
+nilfs-utils
+ntfs-3g
+reiserfsprogs
+xfsprogs
+
 # UNCHECKED
 
 alsa-utils
@@ -48,7 +69,6 @@ b43-fwcutter
 bind-tools
 brltty
 broadcom-wl
-btrfs-progs
 clonezilla
 cloud-init
 
@@ -58,14 +78,10 @@ dhclient
 dhcpcd
 dmraid
 dnsmasq
-dosfstools
-e2fsprogs
 
 efibootmgr
 espeakup
 ethtool
-exfatprogs
-f2fs-tools
 fatresize
 fsarchiver
 gnu-netcat
@@ -81,7 +97,6 @@ ipw2200-fw
 irssi
 iw
 iwd
-jfsutils
 kitty-terminfo
 
 lftp
@@ -89,19 +104,13 @@ libfido2
 libusb-compat
 livecd-sounds
 lsscsi
-lvm2
-lynx
 mc
 memtest86+
 
 modemmanager
-mtools
 nbd
 ndisc6
-nfs-utils
-nilfs-utils
 nmap
-ntfs-3g
 nvme-cli
 openconnect
 openssh
@@ -116,7 +125,6 @@ pv
 qemu-guest-agent
 refind
 reflector
-reiserfsprogs
 rp-pppoe
 rsync
 rxvt-unicode-terminfo
@@ -143,6 +151,5 @@ wireless-regdb
 wireless_tools
 wpa_supplicant
 wvdial
-xfsprogs
 xl2tpd
 zsh
