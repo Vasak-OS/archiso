@@ -103,9 +103,27 @@ sg3_utils
 smartmontools
 usbutils
 
+## Audio
+alsa-firmware
+alsa-plugins
+alsa-utils
+ffmpegthumbnailer
+gst-libav
+gst-plugin-pipewire
+gst-plugins-bad
+gst-plugins-ugly
+libdvdcss
+paprefs
+pavucontrol
+pipewire-alsa
+pipewire-jack
+pipewire-media-session
+pipewire-pulse
+sof-firmware
+
+
 # UNCHECKED
 
-alsa-utils
 arch-install-scripts
 archinstall
 bind-tools
@@ -161,7 +179,6 @@ rsync
 rxvt-unicode-terminfo
 screen
 sdparm
-sof-firmware
 squashfs-tools
 syslinux
 tcpdump
