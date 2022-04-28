@@ -33,6 +33,10 @@ texinfo
 which
 vi
 
+## SystemD
+systemd-sysvcompat
+systemd-resolvconf
+
 # UNCHECKED
 
 alsa-utils
