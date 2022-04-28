@@ -58,6 +58,14 @@ ntfs-3g
 reiserfsprogs
 xfsprogs
 
+## Boot
+efibootmgr
+efitools
+grub
+grub-tools
+os-prober
+refind
+
 # UNCHECKED
 
 alsa-utils
@@ -78,8 +86,6 @@ dhclient
 dhcpcd
 dmraid
 dnsmasq
-
-efibootmgr
 espeakup
 ethtool
 fatresize
@@ -89,7 +95,6 @@ gpart
 gpm
 gptfdisk
 grml-zsh-config
-grub
 hdparm
 intel-ucode
 ipw2100-fw
@@ -123,7 +128,6 @@ ppp
 pptpclient
 pv
 qemu-guest-agent
-refind
 reflector
 rp-pppoe
 rsync
