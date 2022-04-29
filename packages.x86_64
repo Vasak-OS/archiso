@@ -182,6 +182,11 @@ wireless_tools
 wpa_supplicant
 xl2tpd
 
+# Bluetooth
+bluez
+bluez-utils
+blueberry
+
 
 # UNCHECKED
 
