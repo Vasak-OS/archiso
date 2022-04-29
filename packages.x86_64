@@ -122,6 +122,39 @@ pipewire-pulse
 sof-firmware
 
 
+# SOFTWARE
+
+## General
+dialog
+dmraid
+expect
+fakeroot
+freetype2
+git
+gpart
+gpm
+gptfdisk
+haveged
+hwdetect
+hwinfo
+libgsf
+libopenraw
+mlocate
+ntp
+pacman-contrib
+pkgfile
+poppler-glib
+power-profiles-daemon
+rebuild-detector
+reflector
+unrar
+unzip
+wget
+xdg-user-dirs-gtk
+xdg-utils
+xz
+
+
 # UNCHECKED
 
 arch-install-scripts
@@ -135,16 +168,12 @@ darkhttpd
 ddrescue
 dhclient
 dhcpcd
-dmraid
 dnsmasq
 espeakup
 ethtool
 fatresize
 fsarchiver
 gnu-netcat
-gpart
-gpm
-gptfdisk
 grml-zsh-config
 hdparm
 irssi
@@ -173,7 +202,6 @@ ppp
 pptpclient
 pv
 qemu-guest-agent
-reflector
 rp-pppoe
 rsync
 rxvt-unicode-terminfo
