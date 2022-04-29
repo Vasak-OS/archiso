@@ -201,22 +201,32 @@ mkinitcpio-archiso
 pv
 syslinux
 
+## Tools
+gparted
+grsync
+clonezilla
+hdparm
+fsarchiver
+glances
+python-defusedxml
+python-packaging
+bash-completion
+tldr
+duf
+
 
 # UNCHECKED
 
 archinstall
 brltty
 broadcom-wl
-clonezilla
 cloud-init
 darkhttpd
 ddrescue
 dhcpcd
 espeakup
 fatresize
-fsarchiver
 grml-zsh-config
-hdparm
 irssi
 iw
 kitty-terminfo
