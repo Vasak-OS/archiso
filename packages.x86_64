@@ -20,7 +20,6 @@ man-db
 man-pages
 mdadm
 mkinitcpio
-mkinitcpio-archiso
 mkinitcpio-busybox
 mkinitcpio-nfs-utils
 nano
@@ -193,9 +192,18 @@ python-pyqt5
 python-capng
 
 
+# ISO
+
+## Specific
+arch-install-scripts
+memtest86+
+mkinitcpio-archiso
+pv
+syslinux
+
+
 # UNCHECKED
 
-arch-install-scripts
 archinstall
 brltty
 broadcom-wl
@@ -217,7 +225,6 @@ libfido2
 libusb-compat
 livecd-sounds
 mc
-memtest86+
 nmap
 nvme-cli
 openssh
@@ -225,14 +232,12 @@ partclone
 parted
 partimage
 pcsclite
-pv
 qemu-guest-agent
 rsync
 rxvt-unicode-terminfo
 screen
 sdparm
 squashfs-tools
-syslinux
 tcpdump
 terminus-font
 testdisk
