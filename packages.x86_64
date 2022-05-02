@@ -248,6 +248,33 @@ lynx-menu-data
 network-manager-applet
 stalonetray
 
+## Editor
+xed
+
+## Archive
+file-roller
+
+## Mutimedia
+vlc
+
+## Browser
+firefox
+
+## System
+galculator
+neofetch
+
+## Fonts
+adobe-source-han-sans-cn-fonts
+adobe-source-han-sans-jp-fonts
+adobe-source-han-sans-kr-fonts
+cantarell-fonts
+noto-fonts
+ttf-bitstream-vera
+ttf-dejavu
+ttf-liberation
+ttf-opensans
+
 
 # VM SUPPORT
 
