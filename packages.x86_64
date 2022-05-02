@@ -22,8 +22,6 @@ mdadm
 mkinitcpio
 mkinitcpio-busybox
 mkinitcpio-nfs-utils
-nano
-nano-syntax-highlighting
 perl
 sudo
 sysfsutils
@@ -92,15 +90,26 @@ libva-utils
 ## Network
 b43-fwcutter
 broadcom-wl-dkms
+broadcom-wl
 ipw2100-fw
 ipw2200-fw
 linux-atm
 
 ## General
+openssh
 lsscsi
 sg3_utils
 smartmontools
 usbutils
+usbmuxd
+libfido2
+libusb-compat
+fatresize
+partclone
+parted
+squashfs-tools
+tpm2-tss
+udftools
 
 ## Audio
 alsa-firmware
@@ -157,6 +166,7 @@ xz
 bind
 bind-tools
 dhclient
+dhcpcd
 dnsmasq
 ethtool
 gnu-netcat
@@ -180,6 +190,7 @@ wireless-regdb
 wireless_tools
 wpa_supplicant
 xl2tpd
+wvdial
 
 # Bluetooth
 bluez
@@ -190,6 +201,9 @@ blueberry
 firewalld
 python-pyqt5
 python-capng
+
+## Install
+archinstall
 
 
 # ISO
@@ -250,6 +264,8 @@ stalonetray
 
 ## Editor
 xed
+nano
+nano-syntax-highlighting
 
 ## Archive
 file-roller
@@ -263,6 +279,8 @@ firefox
 ## System
 galculator
 neofetch
+kitty-terminfo
+kitty
 
 ## Fonts
 adobe-source-han-sans-cn-fonts
@@ -274,7 +292,11 @@ ttf-bitstream-vera
 ttf-dejavu
 ttf-liberation
 ttf-opensans
+terminus-font
 
+## Shells
+grml-zsh-config
+zsh
 
 # VM SUPPORT
 
@@ -286,53 +308,9 @@ spice-vdagent
 
 ## Virtual-box
 virtualbox-guest-utils
+virtualbox-guest-utils-nox
 
 ## VMware
 open-vm-tools
 xf86-input-vmmouse
 xf86-video-vmware
-
-
-# UNCHECKED
-
-archinstall
-brltty
-broadcom-wl
-cloud-init
-darkhttpd
-ddrescue
-dhcpcd
-espeakup
-fatresize
-grml-zsh-config
-irssi
-iw
-kitty-terminfo
-lftp
-libfido2
-libusb-compat
-livecd-sounds
-mc
-nmap
-nvme-cli
-openssh
-partclone
-parted
-partimage
-pcsclite
-rsync
-rxvt-unicode-terminfo
-screen
-sdparm
-squashfs-tools
-tcpdump
-terminus-font
-testdisk
-tmux
-tpm2-tss
-udftools
-usbmuxd
-vim
-virtualbox-guest-utils-nox
-wvdial
-zsh
