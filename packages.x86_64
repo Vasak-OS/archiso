@@ -215,6 +215,14 @@ tldr
 duf
 
 
+# DESKTOP
+
+## Display manager
+accountsservice
+lightdm-webkit2-greeter
+
+
+
 # VM SUPPORT
 
 ## Qemu
