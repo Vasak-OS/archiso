@@ -237,6 +237,17 @@ python-yaml
 qt5-styleplugins
 qt5ct
 
+## Desktop environment
+lynx-bootstrap
+lynx-base-css
+lynx-desktop
+lynx-desktop-service
+lynx-dock
+lynx-menu
+lynx-menu-data
+network-manager-applet
+stalonetray
+
 
 # VM SUPPORT
 
