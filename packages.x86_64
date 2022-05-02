@@ -221,6 +221,21 @@ duf
 accountsservice
 lightdm-webkit2-greeter
 
+## Dependencies
+gnome-menus
+gtk3
+libwnck3
+libxkbcommon-x11
+nwjs-bin
+polkit-gnome
+pyside2
+python
+python-dbus
+python-gobject
+python-xlib
+python-yaml
+qt5-styleplugins
+qt5ct
 
 
 # VM SUPPORT
