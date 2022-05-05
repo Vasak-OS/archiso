@@ -297,6 +297,10 @@ terminus-font
 grml-zsh-config
 zsh
 
+## Calamares
+calamares
+
+
 # VM SUPPORT
 
 ## Qemu
