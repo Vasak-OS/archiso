@@ -58,7 +58,6 @@ xfsprogs
 efibootmgr
 efitools
 grub
-grub-tools
 os-prober
 refind
 
