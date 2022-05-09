@@ -89,7 +89,6 @@ libva-utils
 ## Network
 b43-fwcutter
 broadcom-wl-dkms
-broadcom-wl
 ipw2100-fw
 ipw2200-fw
 linux-atm
@@ -311,7 +310,6 @@ spice-vdagent
 
 ## Virtual-box
 virtualbox-guest-utils
-virtualbox-guest-utils-nox
 
 ## VMware
 open-vm-tools
