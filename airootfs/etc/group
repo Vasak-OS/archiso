@@ -2,7 +2,8 @@ root:x:0:root
 adm:x:4:lynx
 wheel:x:10:lynx
 uucp:x:14:lynx
-nopasswdlogin:x:966:lynx
-rfkill:x:983:lynx
 sys:x:3:bin,lynx
-lynx:x:1000:lynx
+users:x:984:lynx
+rfkill:x:982:lynx
+autologin:x:1002:lynx
+lynx:x:2022:
