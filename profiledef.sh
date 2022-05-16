@@ -3,8 +3,8 @@
 
 iso_name="lynxos"
 iso_label="LynxOS_$(date +%Y%m)"
-iso_publisher="LynxOS <https://os.lynx.net.ar>"
-iso_application="LynxOS Live/Rescue CD"
+iso_publisher="LynxOS <https://os.lynx.net.ar/>"
+iso_application="LynxOS Live"
 iso_version="$(date +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
