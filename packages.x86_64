@@ -1,6 +1,6 @@
 # BASE
 
-## System 
+## System
 iptables-nft
 base
 archlinux-keyring
@@ -10,10 +10,10 @@ diffutils
 edk2-shell
 inetutils
 less
-linux-tkg-bmq
+linux
 linux-firmware
 linux-firmware-marvell
-linux-tkg-bmq-headers
+linux-headers
 preload
 logrotate
 man-db
@@ -91,7 +91,6 @@ b43-fwcutter
 broadcom-wl-dkms
 ipw2100-fw
 ipw2200-fw
-linux-atm
 
 ## General
 openssh
@@ -109,25 +108,20 @@ squashfs-tools
 tpm2-tss
 udftools
 
-## Audio
-alsa-firmware
-alsa-plugins
-alsa-utils
-ffmpegthumbnailer
-gst-libav
-gst-plugin-pipewire
-gst-plugins-bad
-gst-plugins-ugly
-libdvdcss
-paprefs
-pavucontrol
-pipewire-alsa
-pipewire-jack
-pipewire-media-session
-pipewire-pulse
-rtkit
-sof-firmware
 
+## Audio
+wireplumber
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+pipewire-v4l2
+lib32-pipewire
+lib32-pipewire-jack
+helvum
+xdg-desktop-portal
+xdg-desktop-portal-gnome
+easyeffects
 
 # SOFTWARE
 
@@ -236,6 +230,7 @@ duf
 
 ## Display manager
 accountsservice
+lightdm
 lightdm-webkit2-greeter
 
 ## Dependencies
@@ -266,9 +261,9 @@ network-manager-applet
 stalonetray
 
 ## Editor
-xed
 nano
 nano-syntax-highlighting
+xed
 
 ## Archive
 file-roller
@@ -277,7 +272,7 @@ file-roller
 vlc
 
 ## Browser
-firefox
+vivaldi
 
 ## System
 galculator
