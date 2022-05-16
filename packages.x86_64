@@ -69,7 +69,7 @@ amd-ucode
 intel-ucode
 
 ## X system
-mesa
+mesaopen
 mesa-utils
 nvidia-dkms
 nvidia-utils
@@ -83,6 +83,7 @@ xorg-xinit
 xorg-xinput
 xorg-xkill
 xorg-xrandr
+xorg-xwininfo
 libva
 libva-utils
 
@@ -150,6 +151,7 @@ rebuild-detector
 reflector
 unrar
 unzip
+p7zip
 wget
 xdg-user-dirs-gtk
 xdg-utils
@@ -221,6 +223,7 @@ fsarchiver
 glances
 python-defusedxml
 python-packaging
+python-pygments
 bash-completion
 tldr
 duf
@@ -238,7 +241,8 @@ gnome-menus
 gtk3
 libwnck3
 libxkbcommon-x11
-nwjs-bin
+nwjs
+nwjs-ffmpeg-codecs
 polkit-gnome
 pyside2
 python
@@ -248,6 +252,10 @@ python-xlib
 python-yaml
 qt5-styleplugins
 qt5ct
+
+## Windows Manager
+openbox
+python-xdg
 
 ## Desktop environment
 lynx-bootstrap
@@ -270,15 +278,25 @@ file-roller
 
 ## Mutimedia
 vlc
+imagemagick
+libdvdcss       # Lib for VLC
+mpg123          # Lib for VLC
+protobuf        # Lib for VLC
+lua52-socket    # Lib for VLC
+zvbi            # Lib for VLC
+sdl_image       # Lib for VLC
+aalib           # Lib for VLC
 
 ## Browser
 vivaldi
+vivaldi-ffmpeg-codecs
 
 ## System
 galculator
 neofetch
 kitty-terminfo
 kitty
+xterm
 
 ## Fonts
 adobe-source-han-sans-cn-fonts
@@ -286,6 +304,9 @@ adobe-source-han-sans-jp-fonts
 adobe-source-han-sans-kr-fonts
 cantarell-fonts
 noto-fonts
+noto-fonts-emoji
+noto-fonts-extra
+gnu-free-fonts
 ttf-bitstream-vera
 ttf-dejavu
 ttf-liberation
