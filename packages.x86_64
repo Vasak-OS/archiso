@@ -69,7 +69,6 @@ amd-ucode
 intel-ucode
 
 ## X system
-mesaopen
 mesa-utils
 nvidia-dkms
 nvidia-utils
@@ -279,13 +278,6 @@ file-roller
 ## Mutimedia
 vlc
 imagemagick
-libdvdcss       # Lib for VLC
-mpg123          # Lib for VLC
-protobuf        # Lib for VLC
-lua52-socket    # Lib for VLC
-zvbi            # Lib for VLC
-sdl_image       # Lib for VLC
-aalib           # Lib for VLC
 
 ## Browser
 vivaldi
