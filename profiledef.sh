@@ -20,7 +20,6 @@ file_permissions=(
   ["/etc/sudoers.d/g_wheel"]="0:0:400"
   ["/etc/shadow"]="0:0:400"
   ["/etc/gshadow"]="0:0:400"
-  ["/etc/lsb-release"]="0:0:644"
   ["/etc/os-release"]="0:0:777"
   ["/root"]="0:0:750"
   ["/root/.automated_script.sh"]="0:0:755"
