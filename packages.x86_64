@@ -267,6 +267,9 @@ lynx-menu-data
 network-manager-applet
 stalonetray
 
+## Tools
+lxappearance-gtk3
+
 ## Editor
 nano
 nano-syntax-highlighting
