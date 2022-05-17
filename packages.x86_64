@@ -282,6 +282,28 @@ file-roller
 vlc
 imagemagick
 
+## Codecs
+### Audio
+celt
+a52dec
+libdca
+libmad
+libmpcdec
+opencore-amr
+### Image
+libheif
+libavif
+libwebp
+jasper
+### Video
+dav1d
+svt-av1
+libde265
+libdv
+libmpeg2
+libtheora
+xvidcore
+
 ## Browser
 firefox
 
