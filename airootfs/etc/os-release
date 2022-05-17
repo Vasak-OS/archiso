@@ -1,0 +1,9 @@
+NAME=LynxOS
+PRETTY_NAME=LynxOS
+ID=lynxos
+ID_LIKE=lynxos
+HOME_URL='https://os.lynx.net.ar/'
+DOCUMENTATION_URL='https://os.lynx.net.ar/'
+SUPPORT_URL='https://t.me/LynxOSLinux'
+BUG_REPORT_URL='https://t.me/LynxOSLinux'
+LOGO=lynxos
