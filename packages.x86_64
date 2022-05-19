@@ -269,14 +269,16 @@ stalonetray
 
 ## Tools
 lxappearance-gtk3
+galculator
+gnome-screenshot  
 
 ## Editor
 nano
 nano-syntax-highlighting
-xed
+gedit
 
 ## Archive
-file-roller
+nautilus
 
 ## Mutimedia
 vlc
@@ -308,11 +310,8 @@ xvidcore
 firefox
 
 ## System
-galculator
 neofetch
-kitty-terminfo
-kitty
-xterm
+tilix
 
 ## Fonts
 adobe-source-han-sans-cn-fonts
