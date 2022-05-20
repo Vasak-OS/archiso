@@ -251,6 +251,7 @@ python-xlib
 python-yaml
 qt5-styleplugins
 qt5ct
+libcaca
 
 ## Windows Manager
 openbox
