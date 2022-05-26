@@ -203,6 +203,11 @@ archinstall
 chaotic-keyring
 chaotic-mirrorlist
 
+## Laptop Support
+acpi
+acpica
+acpid
+
 
 # ISO
 
@@ -233,7 +238,7 @@ duf
 ## Display manager
 accountsservice
 lightdm
-lightdm-webkit2-greeter
+lightdm-gtk-greeter
 
 ## Dependencies
 gnome-menus
@@ -331,7 +336,6 @@ ttf-opensans
 terminus-font
 
 ## Shells
-grml-zsh-config
 zsh
 
 ## Calamares
