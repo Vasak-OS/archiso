@@ -257,6 +257,7 @@ python-yaml
 qt5-styleplugins
 qt5ct
 libcaca
+nmcli
 
 ## Windows Manager
 openbox
@@ -271,8 +272,6 @@ lynx-desktop-service
 lynx-dock
 lynx-menu
 lynx-menu-data
-network-manager-applet
-stalonetray
 
 ## Tools
 lxappearance-gtk3
