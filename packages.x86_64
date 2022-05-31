@@ -256,7 +256,6 @@ python-xlib
 python-yaml
 qt5-styleplugins
 qt5ct
-libcaca
 nmcli
 
 ## Windows Manager
@@ -318,6 +317,7 @@ firefox
 ## System
 neofetch
 tilix
+yay
 
 ## Fonts
 adobe-source-han-sans-cn-fonts
