@@ -1,1 +1,0 @@
-LD_PRELOAD=/opt/nwjs/libffmpeg.so nw /usr/share/Lynx/lynx-desktop/ &
