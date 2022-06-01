@@ -256,7 +256,6 @@ python-xlib
 python-yaml
 qt5-styleplugins
 qt5ct
-nmcli
 
 ## Windows Manager
 openbox
