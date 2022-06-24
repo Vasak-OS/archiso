@@ -191,11 +191,6 @@ bluez
 bluez-utils
 blueberry
 
-# Firewall
-firewalld
-python-pyqt5
-python-capng
-
 ## Install
 archinstall
 
