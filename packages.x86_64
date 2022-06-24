@@ -3,7 +3,6 @@
 ## System
 iptables-nft
 base
-archlinux-keyring
 cryptsetup
 device-mapper
 diffutils
@@ -108,7 +107,6 @@ squashfs-tools
 tpm2-tss
 udftools
 
-
 ## Audio
 wireplumber
 pipewire
@@ -118,10 +116,8 @@ pipewire-jack
 pipewire-v4l2
 lib32-pipewire
 lib32-pipewire-jack
-helvum
 xdg-desktop-portal
 xdg-desktop-portal-gnome
-easyeffects
 
 # SOFTWARE
 
@@ -197,6 +193,7 @@ archinstall
 ## Repositories
 chaotic-keyring
 chaotic-mirrorlist
+archlinux-keyring
 
 ## Laptop Support
 acpi
@@ -216,7 +213,6 @@ syslinux
 ## Tools
 gparted
 grsync
-clonezilla
 hdparm
 fsarchiver
 glances
