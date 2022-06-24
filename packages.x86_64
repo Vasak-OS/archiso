@@ -254,11 +254,9 @@ python-dbus
 python-gobject
 python-xlib
 python-yaml
-qt5-styleplugins
-qt5ct
 
 ## Windows Manager
-openbox
+lynx-gala
 python-xdg
 
 ## Desktop environment
@@ -337,7 +335,7 @@ terminus-font
 zsh
 
 ## Calamares
-lynx-calamares
+#lynx-calamares
 
 
 # VM SUPPORT
