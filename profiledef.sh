@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="lynxos"
-iso_label="LynxOS_$(date +%Y%m)"
-iso_publisher="LynxOS <https://os.lynx.net.ar/>"
-iso_application="LynxOS Live"
+iso_name="vasakos"
+iso_label="VasakOS_$(date +%Y%m)"
+iso_publisher="VasakOS <https://os.vasak.net.ar/>"
+iso_application="VasakOS Live"
 iso_version="$(date +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
