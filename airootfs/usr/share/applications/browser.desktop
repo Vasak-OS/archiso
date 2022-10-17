@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Exec=exo-open --launch WebBrowser %u
-Icon=lynx-browser
+Icon=vasak-browser
 StartupNotify=true
 Terminal=false
 Categories=Network;WebBrowser;

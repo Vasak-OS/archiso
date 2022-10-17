@@ -9,7 +9,7 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-DEFAULT_SESSION=lynx-session
+DEFAULT_SESSION=vasak-session
 
 # merge in defaults and keymaps
 
@@ -57,7 +57,7 @@ get_session(){
 		mate) dbus_args+=(mate-session) ;;
 		xfce) dbus_args+=(xfce4-session) ;;
 		openbox) dbus_args+=(openbox-session) ;;
-		lynx) dbus_args+=(lynx-session) ;;
+		vasak) dbus_args+=(vasak-session) ;;
 		*) dbus_args+=($DEFAULT_SESSION) ;;
 	esac
 
