@@ -245,20 +245,22 @@ python-dbus
 python-gobject
 python-xlib
 python-yaml
+libvasak-ui
+libvasak-vue
+bootstrap
 
 ## Windows Manager
-lynx-gala
+vasak-gala
 python-xdg
 
 ## Desktop environment
-lynx-bootstrap
-lynx-base-css
-lynx-cursors-theme
-lynx-desktop
-lynx-desktop-service
-lynx-dock
-lynx-menu
-lynx-menu-data
+#lynx-cursors-theme
+#vasak-desktop
+vasak-desktop-service
+vasak-desktop-settings
+navale
+hydriam
+hydriam-data
 
 ## Tools
 lxappearance-gtk3
@@ -323,7 +325,7 @@ terminus-font
 zsh
 
 ## Calamares
-#lynx-calamares
+
 
 
 # VM SUPPORT
