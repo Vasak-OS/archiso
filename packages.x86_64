@@ -60,7 +60,6 @@ grub
 os-prober
 refind
 
-
 # HARDWARE
 
 ## CPU
@@ -69,8 +68,6 @@ intel-ucode
 
 ## X system
 mesa-utils
-nvidia-dkms
-nvidia-utils
 xf86-input-libinput
 xf86-video-amdgpu
 xf86-video-ati
@@ -187,6 +184,7 @@ blueberry
 
 ## Install
 archinstall
+componere
 
 ## Repositories
 chaotic-keyring
@@ -197,7 +195,6 @@ archlinux-keyring
 acpi
 acpica
 acpid
-
 
 # ISO
 
@@ -221,7 +218,6 @@ bash-completion
 tldr
 duf
 
-
 # DESKTOP
 
 ## Display manager
@@ -234,28 +230,19 @@ gnome-menus
 gtk3
 libwnck3
 libxkbcommon-x11
-nwjs
-nwjs-ffmpeg-codecs
 polkit-gnome
-pyside2
 python
 python-dbus
 python-gobject
 python-xlib
 python-yaml
 libvasak-ui
-libvasak-vue
-bootstrap
 
 ## Windows Manager
-vasak-gala
 python-xdg
 
 ## Desktop environment
-#lynx-cursors-theme
 vasak-desktop
-vasak-desktop-service
-vasak-desktop-settings
 navale
 hydriam
 hydriam-data
@@ -321,10 +308,6 @@ terminus-font
 
 ## Shells
 zsh
-
-## Calamares
-
-
 
 # VM SUPPORT
 
