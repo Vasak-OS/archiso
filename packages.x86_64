@@ -33,7 +33,7 @@ systemd-sysvcompat
 systemd-resolvconf
 
 ## Filesystem
-btrfs-progs
+#btrfs-progs
 dosfstools
 e2fsprogs
 exfatprogs
@@ -184,7 +184,7 @@ blueberry
 
 ## Install
 archinstall
-componere
+#componere
 
 ## Repositories
 chaotic-keyring
@@ -232,17 +232,20 @@ libwnck3
 libxkbcommon-x11
 polkit-gnome
 python
-python-dbus
 python-gobject
 python-xlib
 python-yaml
 libvasak-ui
+libxcb
+xcb-util-cursor
 
 ## Windows Manager
 python-xdg
+xfwm4
 
 ## Desktop environment
-vasak-desktop
+#vasak-desktop
+vasak-desktop-settings
 navale
 hydriam
 hydriam-data
@@ -287,7 +290,7 @@ libtheora
 xvidcore
 
 ## Browser
-firefox
+google-chrome
 
 ## System
 neofetch
