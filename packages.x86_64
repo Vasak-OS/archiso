@@ -184,7 +184,8 @@ blueberry
 
 ## Install
 archinstall
-#componere
+componere
+python-diskinfo
 
 ## Repositories
 chaotic-keyring
