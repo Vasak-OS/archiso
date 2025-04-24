@@ -117,7 +117,7 @@ xdg-desktop-portal-gnome
 # SOFTWARE
 
 ## General
-dialog
+#dialog
 dmraid
 expect
 fakeroot
@@ -183,13 +183,11 @@ bluez-utils
 blueberry
 
 ## Install
-archinstall
-componere
-python-diskinfo
+#archinstall
 
 ## Repositories
-chaotic-keyring
-chaotic-mirrorlist
+#chaotic-keyring
+#chaotic-mirrorlist
 archlinux-keyring
 
 ## Laptop Support
@@ -227,29 +225,22 @@ lightdm
 lightdm-gtk-greeter
 
 ## Dependencies
-gnome-menus
 gtk3
 libwnck3
 libxkbcommon-x11
 polkit-gnome
-python
-python-gobject
-python-xlib
-python-yaml
-libvasak-ui
 libxcb
 xcb-util-cursor
 
 ## Windows Manager
-python-xdg
 xfwm4
 
 ## Desktop environment
 #vasak-desktop
 vasak-desktop-settings
-navale
-hydriam
-hydriam-data
+vpanel
+vmenu
+vasak-control-center
 
 ## Tools
 lxappearance-gtk3
