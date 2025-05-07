@@ -13,7 +13,7 @@ linux
 linux-firmware
 linux-firmware-marvell
 linux-headers
-preload
+#preload
 logrotate
 man-db
 man-pages
@@ -50,7 +50,7 @@ mtools
 nfs-utils
 nilfs-utils
 ntfs-3g
-reiserfsprogs
+#reiserfsprogs
 xfsprogs
 
 ## Boot
@@ -242,6 +242,10 @@ vpanel
 vmenu
 vasak-control-center
 
+## Repositories
+vasakos-mirrorlist
+vasakos-keyring
+
 ## Tools
 lxappearance-gtk3
 galculator
@@ -261,7 +265,7 @@ imagemagick
 
 ## Codecs
 ### Audio
-celt
+#celt
 a52dec
 libdca
 libmad
@@ -282,12 +286,13 @@ libtheora
 xvidcore
 
 ## Browser
-google-chrome
+#google-chrome
+firefox
 
 ## System
-neofetch
+fastfetch
 tilix
-yay
+#yay
 
 ## Fonts
 cantarell-fonts
