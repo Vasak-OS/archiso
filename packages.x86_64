@@ -23,6 +23,8 @@ mkinitcpio-busybox
 mkinitcpio-nfs-utils
 perl
 sudo
+sudo-rs
+eza
 sysfsutils
 texinfo
 which
@@ -239,9 +241,6 @@ xfwm4
 ## Desktop environment
 vasak-desktop
 vasak-desktop-settings
-vpanel
-vmenu
-vasak-control-center
 
 ## Repositories
 vasakos-mirrorlist
