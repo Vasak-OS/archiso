@@ -157,7 +157,6 @@ dhclient
 dhcpcd
 dnsmasq
 ethtool
-gnu-netcat
 iwd
 modemmanager
 nbd
@@ -183,7 +182,6 @@ wvdial
 # Bluetooth
 bluez
 bluez-utils
-blueberry
 
 ## Install
 #archinstall
@@ -219,6 +217,8 @@ python-pygments
 bash-completion
 tldr
 duf
+bluez
+bluez-utils
 
 # DESKTOP
 
@@ -247,7 +247,6 @@ vasakos-mirrorlist
 vasakos-keyring
 
 ## Tools
-lxappearance-gtk3
 galculator
 flameshot
 
@@ -291,7 +290,7 @@ firefox
 
 ## System
 fastfetch
-tilix
+kitty
 #yay
 
 ## Fonts
@@ -323,4 +322,3 @@ virtualbox-guest-utils
 ## VMware
 open-vm-tools
 xf86-input-vmmouse
-xf86-video-vmware
