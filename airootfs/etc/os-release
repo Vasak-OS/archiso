@@ -1,7 +1,7 @@
 NAME=VasakOS
 PRETTY_NAME=VasakOS
 ID=vasakos
-ID_LIKE=vasakos
+ID_LIKE=vskos
 HOME_URL='https://os.vasak.net.ar/'
 DOCUMENTATION_URL='https://os.vasak.net.ar/'
 SUPPORT_URL='https://t.me/VasakOSLinux'
