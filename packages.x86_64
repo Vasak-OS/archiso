@@ -183,9 +183,6 @@ wvdial
 bluez
 bluez-utils
 
-## Install
-#archinstall
-
 ## Repositories
 #chaotic-keyring
 #chaotic-mirrorlist
@@ -243,6 +240,13 @@ vasak-desktop
 vasak-desktop-settings
 vasakos-icon-theme
 cutefish-wallpapers
+vasak-terminal
+vasak-file-manager
+
+## Installers
+vasakos-calamares-config
+vasakos-calamares
+kcrash
 
 ## Repositories
 vasakos-mirrorlist
