@@ -1,6 +1,6 @@
 NAME="VasakOS Linux"
-PRETTY_NAME="VasakOS Linux"
-ID=vasakos
+PRETTY_NAME="VasakOS"
+ID=arch
 ID_LIKE=vasakos
 BUILD_ID=rolling
 HOME_URL='https://os.vasak.net.ar/'
