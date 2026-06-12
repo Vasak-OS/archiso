@@ -84,12 +84,17 @@ xf86-video-vesa
 xf86-video-fbdev
 xf86-video-nouveau
 xorg-server
+xorg-xwayland
 xorg-xdpyinfo
 xorg-xinit
 xorg-xinput
 xorg-xkill
 xorg-xrandr
 xorg-xwininfo
+wayland
+wayland-protocols
+wayland-utils
+egl-wayland
 libva
 libva-utils
 vulkan-virtio
@@ -120,7 +125,10 @@ pipewire-pulse
 pipewire-jack
 pipewire-v4l2
 xdg-desktop-portal
-xdg-desktop-portal-gnome
+xdg-desktop-portal-gtk
+xdg-desktop-portal-wlr
+libportal
+libportal-gtk3
 sof-firmware
 alsa-firmware
 
@@ -220,22 +228,28 @@ lightdm-gtk-greeter
 
 ## Dependencies
 gtk3
+gtk-layer-shell
 libwnck3
 libxkbcommon-x11
 polkit-gnome
 libxcb
 xcb-util-cursor
+webkit2gtk-4.1
 
 ## Windows Manager
-xfwm4
+wayfire
 
 ## Desktop environment
 vasak-desktop
 vasak-desktop-settings
 vasakos-icon-theme
 vasakos-wallpapers
+vasak-settings
+
 vasak-terminal
 vasak-file-manager
+vasak-gallery
+vasak-resonance
 
 ## Installers
 vasakos-calamares-config
