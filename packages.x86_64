@@ -231,7 +231,6 @@ gtk3
 gtk-layer-shell
 libwnck3
 libxkbcommon-x11
-polkit-gnome
 libxcb
 xcb-util-cursor
 webkit2gtk-4.1
@@ -246,6 +245,12 @@ vasak-desktop-settings
 vasakos-icon-theme
 vasakos-wallpapers
 vasak-settings
+
+## Session daemons (systemd user services; replace polkit-gnome)
+polkit-vasak-agent
+vasak-keyring
+vasak-accounts
+vasak-flare-daemon
 
 vasak-terminal
 vasak-file-manager
