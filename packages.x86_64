@@ -248,6 +248,7 @@ cage
 swayidle
 gtklock
 brightnessctl
+wlsunset
 
 ## Desktop environment
 vasak-desktop
