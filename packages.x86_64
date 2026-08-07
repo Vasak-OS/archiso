@@ -223,6 +223,11 @@ duf
 
 ## Display manager
 accountsservice
+vasak-session-manager
+# NOTE: lightdm is kept as the ACTIVE display-manager for now. Switching the
+# display-manager.service symlink to vasak-session-manager depends on resolving
+# the greeter->session handoff (greetd-style daemon vs standalone) — see the
+# session-manager notes. Remove lightdm/greeter once that lands.
 lightdm
 lightdm-gtk-greeter
 
@@ -238,6 +243,14 @@ webkit2gtk-4.1
 ## Windows Manager
 wayfire
 uwsm
+# Kiosk compositor that hosts the vasak-session-manager greeter.
+cage
+
+## Session lock & tools
+# Idle daemon + ext-session-lock locker (themed to match VasakOS) and backlight control.
+swayidle
+gtklock
+brightnessctl
 
 ## Desktop environment
 vasak-desktop
