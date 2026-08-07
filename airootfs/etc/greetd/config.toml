@@ -1,0 +1,15 @@
+# VasakOS greetd configuration for the LIVE ISO.
+# (airootfs overlay — replaces the greetd package default in the live image.)
+
+[terminal]
+vt = 7
+
+# Autologin the live `vasak` user straight into the VasakOS session.
+[initial_session]
+command = "vasak-session"
+user = "vasak"
+
+# After the live session ends, fall back to the graphical greeter.
+[default_session]
+command = "/usr/bin/vasak-session-manager-launch"
+user = "greeter"

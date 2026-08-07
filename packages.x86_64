@@ -223,13 +223,10 @@ duf
 
 ## Display manager
 accountsservice
+# greetd is the display-manager; it runs the vasak-session-manager greeter (in
+# cage) and owns PAM/seat/session hand-off.
+greetd
 vasak-session-manager
-# NOTE: lightdm is kept as the ACTIVE display-manager for now. Switching the
-# display-manager.service symlink to vasak-session-manager depends on resolving
-# the greeter->session handoff (greetd-style daemon vs standalone) — see the
-# session-manager notes. Remove lightdm/greeter once that lands.
-lightdm
-lightdm-gtk-greeter
 
 ## Dependencies
 gtk3
