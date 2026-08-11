@@ -261,6 +261,9 @@ vasak-settings
 ## Session daemons (systemd user services; replace polkit-gnome)
 polkit-vasak-agent
 vasak-keyring
+# Decides which applications may use the online accounts; vasak-accounts
+# refuses every request without it.
+vasak-permissions
 vasak-accounts
 vasak-flare-daemon
 
