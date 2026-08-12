@@ -265,6 +265,8 @@ vasak-keyring
 # refuses every request without it.
 vasak-permissions
 vasak-accounts
+# Mantener una tecla apretada abre el selector de acentos.
+vasak-press-and-hold
 vasak-flare-daemon
 
 vasak-terminal
