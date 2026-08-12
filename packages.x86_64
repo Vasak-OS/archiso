@@ -267,6 +267,10 @@ vasak-permissions
 vasak-accounts
 # Mantener una tecla apretada abre el selector de acentos.
 vasak-press-and-hold
+
+# Diálogo de frase de paso de GPG. Viene como dependencia de gnupg, pero se
+# declara acá porque el escritorio depende de que exista un backend gráfico.
+pinentry
 vasak-flare-daemon
 
 vasak-terminal
