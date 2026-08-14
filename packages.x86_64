@@ -268,6 +268,11 @@ vasak-accounts
 # Mantener una tecla apretada abre el selector de acentos.
 vasak-press-and-hold
 
+# Abre las aplicaciones del celular Android como ventanas del escritorio. Trae
+# adb y scrcpy como dependencias, que es lo que habla con el teléfono y lo que
+# dibuja cada aplicación en su propia pantalla virtual.
+vasak-connect
+
 # Diálogo de frase de paso de GPG. Viene como dependencia de gnupg, pero se
 # declara acá porque el escritorio depende de que exista un backend gráfico.
 pinentry
