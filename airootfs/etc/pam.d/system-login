@@ -1,0 +1,43 @@
+#%PAM-1.0
+#
+# Copia del archivo de pambase con dos líneas agregadas al final de cada pila,
+# las de pam_vasak_keyring. Es la única forma de que el llavero se desbloquee
+# solo al iniciar sesión: la contraseña maestra nunca se guarda en disco, así
+# que alguien tiene que entregársela al demonio, y ese alguien es este módulo.
+#
+# Este es el stack que comparten greetd (a través de system-local-login) y los
+# ingresos por consola, o sea todas las formas de entrar al sistema.
+#
+# Las dos líneas hacen falta y en este orden: `auth` corre durante la
+# autenticación y toma con pam_get_authtok la contraseña recién escrita;
+# `session` la recupera al abrir la sesión y se la pasa al demonio. Con
+# `session` sola el módulo no encuentra nada y el llavero queda bloqueado.
+#
+# `optional` es deliberado: si el llavero falla, el inicio de sesión sigue.
+# Un error acá no puede dejar a nadie afuera del sistema.
+#
+# Ojo al actualizar pambase: como este archivo le pertenece a ese paquete,
+# pacman va a dejar un .pacnew en vez de pisarlo. Hay que mirar el .pacnew y
+# volver a agregar estas dos líneas si el original cambió.
+
+auth       required   pam_shells.so
+auth       requisite  pam_nologin.so
+auth       include    system-auth
+auth       optional   pam_vasak_keyring.so
+
+account    required   pam_access.so
+account    required   pam_nologin.so
+account    include    system-auth
+
+password   include    system-auth
+
+session    optional   pam_loginuid.so
+session    optional   pam_keyinit.so       force revoke
+session    include    system-auth
+session    optional   pam_lastlog2.so      silent
+session    optional   pam_motd.so
+session    optional   pam_mail.so          dir=/var/spool/mail standard quiet
+session    optional   pam_umask.so
+-session   optional   pam_systemd.so
+session    required   pam_env.so
+session    optional   pam_vasak_keyring.so
