@@ -244,9 +244,9 @@ uwsm
 cage
 
 ## Session lock & tools
-# Idle daemon + ext-session-lock locker (themed to match VasakOS) and backlight control.
+# Idle daemon and backlight control. The locker itself is vasak-lock-screen,
+# which ships with vasak-session-manager: the same screen as the login one.
 swayidle
-gtklock
 brightnessctl
 wlsunset
 wlopm
