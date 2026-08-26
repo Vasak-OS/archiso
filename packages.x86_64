@@ -282,6 +282,10 @@ vasak-terminal
 vasak-file-manager
 vasak-gallery
 vasak-resonance
+# Screenshots (bound to PrtSc in the default wayfire.ini) and the system monitor,
+# which is also where the journal of the desktop is read from.
+vasak-shot
+vasak-monitor
 
 ## Installers
 vasakos-calamares-config
