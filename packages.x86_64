@@ -288,8 +288,14 @@ vasak-shot
 vasak-monitor
 
 ## Installers
-vasakos-calamares-config
-vasakos-calamares
+# El instalador propio: interfaz Tauri que maneja archinstall. Reemplaza a
+# calamares, que instalaba copiando el squashfs de la ISO (`unpackfs`); éste
+# hace `pacstrap` desde los repositorios, así que la instalación necesita
+# conexión de punta a punta y el sistema instalado queda con los paquetes al día.
+vasak-installer
+# El motor de la instalación. Es dependencia de vasak-installer y se nombra acá
+# igual, porque que la ISO pueda instalar depende de que esté.
+archinstall
 
 ## Repositories
 vasakos-mirrorlist
