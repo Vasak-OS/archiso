@@ -1,293 +1,37 @@
-# BASE
+# Lo que la ISO instala en el medio live.
+#
+# El escritorio entero —los 255 paquetes que forman VasakOS— está en el
+# metapaquete `vasakos-desktop`, que se arma en `PKGBUILDS/vasakos-desktop/` y
+# sale del repositorio propio. Acá queda sólo lo que agrega el medio live.
+#
+# Sumar un paquete al escritorio es editarle las `depends` a ese metapaquete:
+# este archivo no cambia, y el instalador —que nombra al mismo metapaquete en
+# `vasak-installer/src-tauri/paquetes.txt`— lo recibe sin que haya que tocarlo.
+# Antes las dos listas estaban escritas enteras las dos, en dos repositorios, y
+# había que mantenerlas a mano en sincronía.
 
-## System
-iptables-nft
-base
-cryptsetup
-device-mapper
-diffutils
-edk2-shell
-inetutils
-less
+# EL ESCRITORIO
+vasakos-desktop
+
+# KERNEL
+#
+# No está en el metapaquete: es una elección, y la ISO arranca con el suyo
+# mientras que el sistema instalado recibe el que archinstall ponga. Los
+# encabezados van con él porque `broadcom-wl-dkms` compila su módulo contra
+# ellos.
 linux
-linux-firmware
-linux-firmware-marvell
 linux-headers
-logrotate
-man-db
-man-pages
-mdadm
-mkinitcpio
-mkinitcpio-busybox
-mkinitcpio-nfs-utils
-perl
-sudo
-eza
-sysfsutils
-texinfo
-which
-vi
 
-## SystemD
-systemd-sysvcompat
-systemd-resolvconf
+# SÓLO EL MEDIO LIVE
 
-## Filesystem
-dosfstools
-e2fsprogs
-exfatprogs
-f2fs-tools
-gvfs
-gvfs-afc
-gvfs-gphoto2
-gvfs-mtp
-gvfs-nfs
-gvfs-smb
-jfsutils
-lvm2
-mtools
-nfs-utils
-nilfs-utils
-ntfs-3g
-xfsprogs
-btrfs-progs
-bcachefs-tools
-cifs-utils
-open-iscsi
-nvme-cli
-
-## Boot
-efibootmgr
-efitools
-grub
-os-prober
-refind
-
-# HARDWARE
-
-## CPU
-amd-ucode
-intel-ucode
-
-## X system
-mesa
-mesa-utils
-libva-mesa-driver
-intel-media-driver
-xf86-input-libinput
-xf86-input-evdev
-xf86-video-amdgpu
-xf86-video-ati
-xf86-video-intel
-xf86-video-qxl
-xf86-video-vesa
-xf86-video-fbdev
-xf86-video-nouveau
-xorg-server
-xorg-xwayland
-xorg-xdpyinfo
-xorg-xinit
-xorg-xinput
-xorg-xkill
-xorg-xrandr
-xorg-xwininfo
-wayland
-wayland-protocols
-wayland-utils
-egl-wayland
-libva
-libva-utils
-vulkan-virtio
-virglrenderer
-libglvnd
-
-## General
-openssh
-lsscsi
-sg3_utils
-smartmontools
-usbutils
-usbmuxd
-libfido2
-libusb-compat
-fatresize
-partclone
-parted
-squashfs-tools
-tpm2-tss
-udftools
-
-## Audio
-wireplumber
-pipewire
-pipewire-alsa
-pipewire-pulse
-pipewire-jack
-pipewire-v4l2
-xdg-desktop-portal
-xdg-desktop-portal-gtk
-xdg-desktop-portal-wlr
-libportal
-libportal-gtk3
-sof-firmware
-alsa-firmware
-
-# SOFTWARE
-
-## General
-dmraid
-expect
-fakeroot
-freetype2
-git
-gpart
-gpm
-gptfdisk
-haveged
-hwdetect
-hwinfo
-libgsf
-libopenraw
-mlocate
-ntp
-pacman-contrib
-pkgfile
-poppler-glib
-power-profiles-daemon
-rebuild-detector
-reflector
-unrar
-unzip
-p7zip
-wget
-xdg-user-dirs-gtk
-xdg-utils
-xz
-
-## Network
-bind
-bind-tools
-dnsmasq
-ethtool
-modemmanager
-nbd
-ndisc6
-networkmanager
-networkmanager-openvpn
-nss-mdns
-openconnect
-openvpn
-ppp
-usb_modeswitch
-vpnc
-wireless-regdb
-wpa_supplicant
-b43-fwcutter
-broadcom-wl-dkms
-avahi
-openresolv
-nss-mdns
-
-# Bluetooth
-bluez
-bluez-utils
-
-## Laptop Support
-acpi
-acpica
-acpid
-
-# ISO
-
-## Specific
-arch-install-scripts
-memtest86+
+## Arranque de la ISO
+# El hook de mkinitcpio que monta el squashfs; sin esto la imagen no bootea.
 mkinitcpio-archiso
-pv
+memtest86+
 syslinux
+edk2-shell
 
-## Tools
-gparted
-grsync
-hdparm
-fsarchiver
-glances
-python-defusedxml
-python-packaging
-python-pygments
-bash-completion
-tldr
-duf
-
-# DESKTOP
-
-## Display manager
-accountsservice
-# greetd is the display-manager; it runs the vasak-session-manager greeter (in
-# cage) and owns PAM/seat/session hand-off.
-greetd
-vasak-session-manager
-
-## Dependencies
-gtk3
-gtk-layer-shell
-libwnck3
-libxkbcommon-x11
-libxcb
-xcb-util-cursor
-webkit2gtk-4.1
-
-## Windows Manager
-wayfire
-uwsm
-# Kiosk compositor that hosts the vasak-session-manager greeter.
-cage
-
-## Session lock & tools
-# Idle daemon and backlight control. The locker itself is vasak-lock-screen,
-# which ships with vasak-session-manager: the same screen as the login one.
-swayidle
-brightnessctl
-wlsunset
-wlopm
-
-## Desktop environment
-vasak-desktop
-vasak-desktop-settings
-vasakos-icon-theme
-vasakos-wallpapers
-vasak-settings
-
-## Session daemons (systemd user services; replace polkit-gnome)
-polkit-vasak-agent
-vasak-keyring
-# Decides which applications may use the online accounts; vasak-accounts
-# refuses every request without it.
-vasak-permissions
-vasak-accounts
-# Mantener una tecla apretada abre el selector de acentos.
-vasak-press-and-hold
-
-# Abre las aplicaciones del celular Android como ventanas del escritorio. Trae
-# adb y scrcpy como dependencias, que es lo que habla con el teléfono y lo que
-# dibuja cada aplicación en su propia pantalla virtual.
-vasak-connect
-
-# Diálogo de frase de paso de GPG. Viene como dependencia de gnupg, pero se
-# declara acá porque el escritorio depende de que exista un backend gráfico.
-pinentry
-vasak-flare-daemon
-
-vasak-terminal
-vasak-file-manager
-vasak-gallery
-vasak-resonance
-# Screenshots (bound to PrtSc in the default wayfire.ini) and the system monitor,
-# which is also where the journal of the desktop is read from.
-vasak-shot
-vasak-monitor
-
-## Installers
+## Instalación
 # El instalador propio: interfaz Tauri que maneja archinstall. Reemplaza a
 # calamares, que instalaba copiando el squashfs de la ISO (`unpackfs`); éste
 # hace `pacstrap` desde los repositorios, así que la instalación necesita
@@ -296,70 +40,7 @@ vasak-installer
 # El motor de la instalación. Es dependencia de vasak-installer y se nombra acá
 # igual, porque que la ISO pueda instalar depende de que esté.
 archinstall
-
-## Repositories
-vasakos-mirrorlist
-vasakos-keyring
-archlinux-keyring
-
-## Tools
-galculator
-
-## Editor
-nano
-nano-syntax-highlighting
-gedit
-
-## Mutimedia
-vlc
-imagemagick
-ffmpeg
-
-## Codecs
-### Audio
-a52dec
-libdca
-libmad
-libmpcdec
-opencore-amr
-### Image
-libheif
-libavif
-libwebp
-jasper
-### Video
-dav1d
-svt-av1
-libde265
-libdv
-libmpeg2
-libtheora
-xvidcore
-
-## Browser
-firefox
-
-## System
-fastfetch
-
-## Fonts
-cantarell-fonts
-noto-fonts
-noto-fonts-emoji
-noto-fonts-extra
-gnu-free-fonts
-ttf-bitstream-vera
-ttf-dejavu
-ttf-liberation
-ttf-opensans
-terminus-font
-
-## Shells
-zsh
-
-# VM SUPPORT
-
-spice-vdagent
-virtualbox-guest-utils
-open-vm-tools
-xf86-input-vmmouse
+# `arch-chroot` y `genfstab`, que es con lo que se entra al sistema recién
+# instalado. `pv` mide el avance de la copia.
+arch-install-scripts
+pv
