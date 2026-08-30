@@ -1,8 +1,16 @@
 # Lo que la ISO instala en el medio live.
 #
-# El escritorio entero —los 255 paquetes que forman VasakOS— está en el
-# metapaquete `vasakos-desktop`, que se arma en `PKGBUILDS/vasakos-desktop/` y
-# sale del repositorio propio. Acá queda sólo lo que agrega el medio live.
+# El escritorio entero está en el metapaquete `vasakos-desktop`, que se arma en
+# `PKGBUILDS/vasakos-desktop/` y sale del repositorio propio. Acá queda sólo lo
+# que agrega el medio live.
+#
+# El corte es ése y conviene tenerlo a mano: en el metapaquete va lo que el
+# **escritorio** necesita para funcionar; acá, lo que hace falta para **armar o
+# arrancar la ISO** e instalar desde ella; y lo que es una **elección del
+# usuario** —navegador, drivers, impresoras— va en `complementos.toml` del
+# instalador. Un paquete en dos de las tres listas suele ser un error: cuando
+# `firefox` y `broadcom-wl-dkms` estaban en el metapaquete *y* entre los
+# complementos, la casilla del instalador no cambiaba nada.
 #
 # Sumar un paquete al escritorio es editarle las `depends` a ese metapaquete:
 # este archivo no cambia, y el instalador —que nombra al mismo metapaquete en
@@ -44,3 +52,44 @@ archinstall
 # instalado. `pv` mide el avance de la copia.
 arch-install-scripts
 pv
+
+## Particionado y rescate
+#
+# Estaban en `vasakos-desktop` y no son del escritorio: son de la máquina que
+# instala. `parted` y `gptfdisk` los usa archinstall para escribir la tabla de
+# particiones —sin ellos no hay instalación—; el resto es lo que hace que esta
+# ISO sirva además para rescatar un disco que ya existe.
+parted
+gptfdisk
+gparted
+partclone
+fatresize
+gpart
+udftools
+fsarchiver
+dmraid
+squashfs-tools
+grsync
+nbd
+open-iscsi
+
+## Wi-Fi Broadcom
+#
+# `broadcom-wl-dkms` es lo que hace andar buena parte de las placas Broadcom, y
+# acá importa más que antes: la instalación necesita red de punta a punta, así
+# que una portátil con esa placa y sin este módulo no puede instalar. Compila
+# contra los `linux-headers` de arriba. En el sistema instalado no va por
+# dependencia: es un complemento del instalador (`wifi-broadcom`), que sólo lo
+# ofrece si detecta la placa.
+broadcom-wl-dkms
+b43-fwcutter
+
+## Máquina virtual
+#
+# Para la sesión viva cuando la ISO se prueba en un hipervisor: portapapeles y
+# resolución que sigue a la ventana. No van en el escritorio porque un equipo
+# instalado en metal no los usa nunca. `xf86-input-vmmouse` no está: era el
+# driver de X, y acá no hay Xorg.
+spice-vdagent
+open-vm-tools
+virtualbox-guest-utils
