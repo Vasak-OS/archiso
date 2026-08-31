@@ -35,7 +35,14 @@ linux-headers
 ## Arranque de la ISO
 # El hook de mkinitcpio que monta el squashfs; sin esto la imagen no bootea.
 mkinitcpio-archiso
+# El test de memoria, en sus dos versiones: son binarios distintos para las dos
+# formas de arrancar que arma este perfil. `memtest86+` trae el de BIOS, que
+# ofrece syslinux, y `memtest86+-efi` el de UEFI, que ofrece systemd-boot.
+# Faltando el segundo, mkarchiso avisa —«Memory testing will not be available
+# from the UEFI boot loader»— y sigue: la imagen se arma igual, sin test de
+# memoria en la única forma de arrancar que usan los equipos de hoy.
 memtest86+
+memtest86+-efi
 syslinux
 edk2-shell
 
