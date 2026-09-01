@@ -1,7 +1,11 @@
 NAME="VasakOS Linux"
 PRETTY_NAME="VasakOS"
-ID=arch
-ID_LIKE=vasakos
+# `ID` es el identificador propio y `ID_LIKE` con qué es compatible. Estaban al
+# revés —ID=arch, ID_LIKE=vasakos—, que dice «soy Arch y me parezco a VasakOS».
+# Es el mismo par que usan /etc/lsb-release y el /etc/os-release del sistema
+# instalado, así que ahora los tres coinciden.
+ID=vasakos
+ID_LIKE=arch
 BUILD_ID=rolling
 HOME_URL='https://os.vasak.net.ar/'
 DOCUMENTATION_URL='https://os.vasak.net.ar/docs'
