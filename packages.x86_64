@@ -21,6 +21,30 @@
 # EL ESCRITORIO
 vasakos-desktop
 
+# LOS PROVEEDORES QUE ELEGIMOS NOSOTROS
+#
+# Los tres ya vienen con el metapaquete, y se nombran acá igual. Satisfacen
+# dependencias virtuales con más de un proveedor, y pacman resuelve eso buscando
+# primero entre los paquetes pedidos **como objetivo**: las dependencias de un
+# objetivo no cuentan para esa búsqueda. Cuando ninguno es objetivo, elige por
+# orden de repositorio y después alfabético.
+#
+# Eso rompió una instalación: `firefox` —un complemento— arrastra `ffmpeg`, que
+# pide el `jack` virtual, y al ordenar antes que `vasakos-desktop` hacía que
+# pacman eligiera `jack2` antes de llegar a las depends del metapaquete.
+# `jack2` conflictúa con el `pipewire-jack` que el metapaquete exige, y pacstrap
+# murió con «unresolvable package conflicts detected» **después** de formatear
+# el disco. En el instalador ya están fijados, en `paquetes.txt`.
+#
+# Acá no hay ningún complemento y `vasakos-desktop` es el único que pide ffmpeg,
+# así que hoy se resuelve bien — pero por dónde caen las líneas dentro de sus
+# `depends`: `pipewire-jack` está antes que `ffmpeg` en ese array, y reordenarlo
+# rompería la construcción de la imagen sin que nada explique por qué. Que la
+# ISO arranque y dibuje no puede depender de eso.
+mesa
+mkinitcpio
+pipewire-jack
+
 # KERNEL
 #
 # No está en el metapaquete: es una elección, y la ISO arranca con el suyo
