@@ -45,6 +45,95 @@ mesa
 mkinitcpio
 pipewire-jack
 
+# LO QUE EL ESCRITORIO YA NO TRAE
+#
+# `vasakos-desktop` lleva lo que necesita **cualquier** máquina, así que dejó de
+# llevar los controladores de todos los fabricantes: cada instalación cargaba los
+# 41 MiB del de vídeo de Intel y los 43 del firmware de audio de Intel, en una
+# máquina AMD también. Al sistema instalado se los pone el instalador, que mira
+# qué ató el kernel del medio vivo (`hardware.rs`).
+#
+# Acá van **todos**, y no es la misma decisión: esta imagen arranca en hardware
+# que no conocemos, así que tiene que traer el firmware de lo que sea que haya.
+
+## La base que traía el metapaquete
+#
+# Estos cuatro son la lista base de archinstall, que los instala siempre en el
+# sistema nuevo — pero la ISO no pasa por archinstall: la arma `mkarchiso` con
+# esta lista. Sin `base` no hay ni coreutils.
+base
+sudo
+linux-firmware
+mkinitcpio
+
+## Microcódigo, los dos
+#
+# En el sistema instalado lo elige archinstall según la CPU que encuentra. Acá no
+# se sabe qué CPU va a arrancar la imagen.
+amd-ucode
+intel-ucode
+
+## Controladores y firmware de cada fabricante
+intel-media-driver
+sof-firmware
+alsa-firmware
+
+## Radio y banda ancha móvil
+#
+# Sin esto, una portátil no ve ninguna red inalámbrica en el medio vivo — y la
+# instalación necesita red de punta a punta.
+bluez
+bluez-utils
+wireless-regdb
+wpa_supplicant
+modemmanager
+usb_modeswitch
+
+## Sistemas de archivos
+#
+# Los tres que ofrece el instalador, más lo que hace falta para rescatar un disco
+# que ya existe. En el sistema instalado archinstall agrega sólo el del sistema
+# elegido.
+btrfs-progs
+xfsprogs
+f2fs-tools
+lvm2
+mdadm
+nfs-utils
+cifs-utils
+mtools
+
+## Diagnóstico
+#
+# No los usa ninguna aplicación del escritorio, y por eso salieron del
+# metapaquete. Acá sirven: esta imagen también se usa para revisar un equipo que
+# no arranca.
+smartmontools
+usbutils
+ethtool
+nvme-cli
+libfido2
+mesa-utils
+wayland-utils
+
+## Máquina virtual
+#
+# Aceleración de vídeo cuando la imagen corre en un hipervisor. Un equipo
+# instalado en metal no la usa nunca.
+virglrenderer
+
+## Lo que **no** volvió, y por qué
+#
+#   - `egl-wayland`: lo pide `nvidia-utils`, o sea que llega con el complemento
+#     del controlador propietario. En el medio vivo se usa nouveau.
+#   - `bcachefs-tools`: el instalador ofrece btrfs, ext4 y xfs, así que no hay
+#     nada que formatear con eso. Rescatar un disco bcachefs ya existente no
+#     entra en 8,9 MiB de imagen.
+#   - `noto-fonts-cjk`: 299 MiB, que era el paquete más grande de la ISO. El
+#     precio es que un texto en chino, japonés o coreano se ve con cuadraditos en
+#     el medio vivo; el sistema instalado los recibe si su idioma los necesita, y
+#     hay un complemento para el resto.
+
 # KERNEL
 #
 # No está en el metapaquete: es una elección, y la ISO arranca con el suyo
