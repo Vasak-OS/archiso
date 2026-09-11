@@ -9,9 +9,12 @@
 #      negra igual.
 [Unit]
 Description=Explicar en pantalla que el escritorio no arrancó
-# Sin esto, el camino del temporizador dispararía el mensaje en un equipo donde
-# el escritorio sí abrió.
-ConditionPathExists=/run/archiso
+# Sin `Condition*` que limite esto al medio en vivo, a propósito. La unidad vive
+# en `airootfs/`, que es la imagen en vivo y nada más: el instalador arma el
+# sistema nuevo con paquetes y no copia nada de acá —ni siquiera la
+# configuración de red del medio—, así que fuera del ISO no existe. Una
+# condición sobre una ruta que no se pudo comprobar apagaría esto en silencio,
+# que es el modo de falla que esta unidad viene a evitar.
 
 [Service]
 Type=oneshot

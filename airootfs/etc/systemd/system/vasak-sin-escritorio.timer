@@ -6,7 +6,6 @@
 # arranque que funcionaba.
 [Unit]
 Description=Comprobar a los 90 s si el escritorio apareció
-ConditionPathExists=/run/archiso
 
 [Timer]
 OnBootSec=90s
