@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# El informe que hay que adjuntar cuando el escritorio no arranca.
+#
+# Existe por una frase del informe original de la pantalla negra: «no se cuenta
+# con logs». Sin registro no hay nada que mirar, y pedirle a alguien que corra
+# seis comandos de `journalctl` desde una consola cuando no le arrancó el
+# escritorio es pedirle lo que no va a poder hacer.
+#
+# Esto junta todo en un archivo, y sólo lo que sirve para este problema:
+#
+#   - qué máquina es, y si es virtual y de cuál
+#   - qué dispositivo de video hay, y si el kernel le dio un nodo DRM — que es
+#     lo que necesita el compositor: sin `/dev/dri/card*` no hay sesion posible
+#   - si hay OpenGL, y por qué camino
+#   - qué dijeron greetd, la sesion y el compositor
+#
+# Uso: vasak-informe [archivo]   (por omisión, /root/vasak-informe.txt)
+set -u
+
+DESTINO="${1:-/root/vasak-informe.txt}"
+
+# `|| true` en todo: este guion corre justo cuando algo ya falló, así que
+# cualquier comando puede no estar o no contestar. Un informe a medias sirve;
+# un guion que se corta a la mitad, no.
+titulo() {
+    printf '\n===== %s =====\n' "$1"
+}
+
+{
+    printf 'Informe de VasakOS — %s\n' "$(date -Is 2>/dev/null || true)"
+
+    titulo 'Sistema'
+    cat /etc/os-release 2>/dev/null | grep -E '^(NAME|VERSION|BUILD_ID)=' || true
+    printf 'kernel: %s\n' "$(uname -r 2>/dev/null || true)"
+
+    titulo 'Virtualizacion'
+    # `systemd-detect-virt` nombra el hipervisor, que es el dato que faltaba:
+    # el informe original decía «QEMU» y el problema terminó viéndose en
+    # VirtualBox, que no tiene nada que ver — otro nodo DRM y otro driver.
+    systemd-detect-virt 2>/dev/null || printf 'no se pudo determinar\n'
+
+    titulo 'Video (PCI)'
+    lspci -nnk 2>/dev/null | grep -A3 -iE 'vga|3d|display' || printf 'lspci no disponible\n'
+
+    titulo 'Nodos DRM'
+    # Sin ningún `/dev/dri/card*` no hay compositor posible, y es la causa más
+    # probable de una pantalla negra en una máquina virtual: el adaptador
+    # emulado que se eligió no trae KMS.
+    ls -l /dev/dri/ 2>/dev/null || printf 'NO HAY /dev/dri — el kernel no le dio un nodo DRM a la placa\n'
+
+    titulo 'Modulos de video cargados'
+    lsmod 2>/dev/null | grep -iE 'drm|vmwgfx|vboxvideo|virtio_gpu|bochs|qxl|i915|amdgpu|radeon|nouveau|nvidia' \
+        || printf 'ninguno\n'
+
+    titulo 'OpenGL'
+    # Si esto contesta «llvmpipe» o «softpipe», hay OpenGL por software y el
+    # compositor puede arrancar aunque vaya lento. Si no contesta nada, no hay.
+    timeout 20 eglinfo -B 2>/dev/null | grep -iE 'renderer|vendor|opengl' | head -10 \
+        || timeout 20 glxinfo -B 2>/dev/null | grep -iE 'renderer|vendor' | head -10 \
+        || printf 'ni eglinfo ni glxinfo contestaron\n'
+
+    titulo 'Sesiones'
+    loginctl list-sessions 2>/dev/null || printf 'loginctl no contesto\n'
+
+    titulo 'Unidades en fallo'
+    systemctl --failed --no-legend --no-pager 2>/dev/null || true
+
+    titulo 'greetd'
+    journalctl -b -u greetd.service --no-pager -n 200 2>/dev/null || printf 'sin registro\n'
+
+    titulo 'Sesion del usuario en vivo'
+    # El compositor corre bajo uwsm como unidad del usuario, así que su salida
+    # queda en el registro de ese usuario y no en el del sistema. Se filtra por
+    # UID porque el nombre de la unidad depende de la versión de uwsm.
+    journalctl -b _UID="$(id -u vasak 2>/dev/null || echo 2022)" --no-pager -n 300 2>/dev/null \
+        || printf 'sin registro\n'
+
+    titulo 'Errores del arranque'
+    journalctl -b -p err --no-pager -n 200 2>/dev/null || printf 'sin registro\n'
+} > "$DESTINO" 2>/dev/null
+
+chmod 0600 "$DESTINO" 2>/dev/null || true
+printf 'Informe escrito en %s\n' "$DESTINO"

@@ -27,4 +27,10 @@ file_permissions=(
   ["/usr/local/bin/choose-mirror"]="0:0:755"
   ["/usr/local/bin/Installation_guide"]="0:0:755"
   ["/usr/local/bin/livecd-sound"]="0:0:755"
+  # Los tres de la pantalla negra: el que explica, el que junta el informe y el
+  # que decide si hace falta. Sin el bit de ejecución systemd no los corre y el
+  # ISO queda igual que antes, sin que nada avise.
+  ["/usr/local/bin/vasak-sin-escritorio"]="0:0:755"
+  ["/usr/local/bin/vasak-informe"]="0:0:755"
+  ["/usr/local/bin/vasak-falta-escritorio"]="0:0:755"
 )

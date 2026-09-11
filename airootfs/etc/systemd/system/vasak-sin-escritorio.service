@@ -1,0 +1,21 @@
+# Deja una consola con la explicación y el informe cuando el escritorio no abre.
+#
+# Se dispara por dos caminos, que son dos fallas distintas:
+#
+#   1. `OnFailure=` de greetd, o sea greetd agotó sus cinco reintentos.
+#   2. El temporizador, a los noventa segundos del arranque, si para entonces
+#      no hay ninguna sesión gráfica. Ese es el caso que el primero no ve:
+#      greetd puede quedarse «activo» con el saludador adentro y la pantalla
+#      negra igual.
+[Unit]
+Description=Explicar en pantalla que el escritorio no arrancó
+# Sin esto, el camino del temporizador dispararía el mensaje en un equipo donde
+# el escritorio sí abrió.
+ConditionPathExists=/run/archiso
+
+[Service]
+Type=oneshot
+# Sale 0 cuando no hay escritorio. Con escritorio sale 1, que para systemd es
+# saltear la unidad sin marcarla fallida.
+ExecCondition=/usr/local/bin/vasak-falta-escritorio
+ExecStart=/usr/local/bin/vasak-sin-escritorio

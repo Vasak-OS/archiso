@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# ¿Hay algo en la pantalla?
+#
+# Va como `ExecCondition=` de `vasak-sin-escritorio.service`: sale 0 cuando
+# **no** hay escritorio —y entonces la unidad corre— y 1 cuando sí lo hay, que
+# para systemd es saltear la unidad sin marcarla como fallida.
+#
+# El caso que atrapa es el que el `OnFailure=` de greetd no atrapa: greetd
+# arrancando bien, tomando la sesión en vivo, esa sesión muriéndose, greetd
+# cayendo al saludador y el saludador tampoco pudiendo dibujar. greetd sigue
+# «activo» todo el tiempo y la pantalla está negra igual.
+#
+# # Por qué se equivoca para el lado seguro
+#
+# Equivocarse acá tiene dos costos muy distintos. Decir «no hay escritorio»
+# cuando sí lo hay le roba la consola a alguien que estaba trabajando: rompe un
+# arranque que funcionaba. Decir «sí hay» cuando no lo hay deja las cosas como
+# estaban, que es de donde venimos. Así que ante la duda, se calla.
+#
+# De ahí las dos concesiones:
+#
+#   - Vale cualquier sesión del asiento que sea gráfica **o** del saludador. El
+#     saludador de greetd es lo que se ve mientras nadie entró, y declara su
+#     tipo según cómo lo hayan lanzado: mirar sólo `Type=wayland` lo dejaría
+#     afuera y el mensaje taparía una pantalla que estaba bien.
+#   - Se pregunta varias veces. A los noventa segundos greetd puede estar
+#     justo entre dos reintentos, y ese hueco dura menos de un segundo.
+set -u
+
+hay_algo() {
+    local id datos
+    while read -r id _; do
+        [ -n "$id" ] || continue
+        datos=$(loginctl show-session "$id" -p Seat -p Type -p Class 2>/dev/null) || continue
+        case "$datos" in
+            *Seat=seat0*) ;;
+            *) continue ;;
+        esac
+        case "$datos" in
+            *Type=wayland*|*Type=x11*|*Class=greeter*) return 0 ;;
+        esac
+    done < <(loginctl list-sessions --no-legend 2>/dev/null)
+    return 1
+}
+
+for _ in 1 2 3 4 5 6; do
+    hay_algo && exit 1
+    sleep 3
+done
+
+exit 0

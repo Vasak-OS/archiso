@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+#
+# Qué hacer cuando el escritorio no arrancó en el medio en vivo.
+#
+# # El problema que resuelve
+#
+# El informe decía «pantalla negra» y «no se cuenta con logs», y las dos cosas
+# eran la misma: cuando la sesión gráfica no arranca, el ISO no deja **ninguna**
+# forma evidente de llegar al registro.
+#
+# El camino era éste. `greetd.service` declara `Conflicts=getty@tty1.service`,
+# así que al arrancar detiene la consola de tty1. Si la sesión falla, greetd
+# reintenta —`Restart=always`, cinco veces en treinta segundos— y después queda
+# en fallo. En ese momento no hay ni sesión gráfica en el vt7 ni consola en el
+# tty1: la pantalla queda en lo último que imprimió el kernel, y tty1 no vuelve
+# solo porque greetd se haya muerto.
+#
+# Quedaban los vt2 a vt6, que logind levanta a pedido, pero piden usuario y
+# contraseña. Y aunque `root` tiene la contraseña vacía, eso hay que saberlo.
+#
+# # Qué hace
+#
+# Deja el equipo en una consola con una explicación en pantalla, y el informe ya
+# escrito en un archivo. Nada más: no intenta arreglar la sesión ni volver a
+# arrancarla, porque el motivo de este guion es que alguien pueda **contar** qué
+# pasó, no adivinarlo desde acá.
+set -u
+
+INFORME=/root/vasak-informe.txt
+CONSOLA=/dev/tty1
+
+# El informe primero. Si algo de lo de abajo falla, el archivo ya está.
+if command -v vasak-informe >/dev/null 2>&1; then
+    vasak-informe "$INFORME" >/dev/null 2>&1 || true
+fi
+
+# La consola de tty1 la había detenido greetd por su `Conflicts=`. Volverla a
+# levantar es lo que hace que haya dónde escribir y dónde trabajar.
+systemctl start getty@tty1.service >/dev/null 2>&1 || true
+
+# Y traerla al frente. Acá sí corresponde: se llega a este guion cuando greetd
+# ya agotó sus reintentos, o sea que en el vt7 no va a aparecer nada. Cambiar de
+# consola cuando el escritorio todavía podría aparecer sería peor que la
+# pantalla negra.
+if command -v chvt >/dev/null 2>&1; then
+    chvt 1 >/dev/null 2>&1 || true
+fi
+
+# El texto va sin tildes ni ñ a propósito: la consola del kernel arranca en
+# US-ASCII y, hasta que alguien corra `setfont`, un acento sale como dos
+# caracteres rotos. Un mensaje de error que se ve roto hace dudar de todo lo
+# que dice.
+{
+    printf '\n'
+    printf '  VasakOS no pudo abrir el escritorio.\n'
+    printf '  VasakOS could not start the desktop.\n'
+    printf '\n'
+    printf '  El informe esta en: %s\n' "$INFORME"
+    printf '  The report is at:   %s\n' "$INFORME"
+    printf '\n'
+    printf '  Para verlo:        less %s\n' "$INFORME"
+    printf '  Para copiarlo a un pendrive:\n'
+    printf '    lsblk -o NAME,LABEL,SIZE\n'
+    printf '    mount /dev/sdX1 /mnt && cp %s /mnt/ && umount /mnt\n' "$INFORME"
+    printf '\n'
+    printf '  Volver a intentar:  systemctl restart greetd\n'
+    printf '\n'
+} > "$CONSOLA" 2>/dev/null || true

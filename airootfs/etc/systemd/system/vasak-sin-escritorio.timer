@@ -1,0 +1,17 @@
+# El segundo camino: mirar si a los noventa segundos hay algo en la pantalla.
+#
+# Noventa y no quince. En una máquina virtual sin aceleración el compositor
+# dibuja por software y tarda; adelantarse y robarle la consola a un escritorio
+# que estaba por aparecer es peor que la pantalla negra, porque rompe un
+# arranque que funcionaba.
+[Unit]
+Description=Comprobar a los 90 s si el escritorio apareció
+ConditionPathExists=/run/archiso
+
+[Timer]
+OnBootSec=90s
+AccuracySec=5s
+Unit=vasak-sin-escritorio.service
+
+[Install]
+WantedBy=timers.target
