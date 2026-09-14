@@ -148,6 +148,39 @@ grep -q 'vasak-informe' airootfs/usr/local/bin/vasak-sin-escritorio 2>/dev/null 
     || mal 'no se escribe ningún informe, que es lo que faltaba en el reporte original'
 
 # ---------------------------------------------------------------------------
+tema 'Y esa salida no se lleva puesto al escritorio'
+
+# `greetd.service` declara `Conflicts=getty@tty1.service`, y en systemd un
+# `Conflicts=` es **simétrico**: arrancar el getty detiene greetd, sin aviso ni
+# error. Un `systemctl start getty@tty1.service` sin guarda dentro de la red de
+# seguridad es, literalmente, apagar el escritorio.
+#
+# Pasó: en el ISO del 14/09/2026 el temporizador disparaba a los 90 s, el getty
+# arrancaba a los 114 s y greetd se detenía en el mismo segundo — veintitrés
+# segundos antes de que la sesión pasara a `wayland`. La imagen quedaba en la
+# consola con el flood del kernel encima, o sea sin escritorio y sin el mensaje.
+#
+# Esto no lo ve `mkarchiso` ni ninguna prueba de sintaxis: las dos piezas son
+# correctas por separado.
+if grep -q 'getty@tty1' airootfs/usr/local/bin/vasak-sin-escritorio 2>/dev/null; then
+    if grep -q 'is-active --quiet greetd' airootfs/usr/local/bin/vasak-sin-escritorio 2>/dev/null; then
+        ok 'la salida no arranca el getty con greetd vivo'
+    else
+        mal 'vasak-sin-escritorio arranca getty@tty1 sin comprobar greetd: eso detiene greetd por su Conflicts='
+    fi
+else
+    ok 'la salida no toca getty@tty1'
+fi
+
+# La sesión en vivo nace `Type=tty` —la abre greetd por PAM— y recién pasa a
+# `wayland` cuando el compositor se registra: medido, 51 s contra 137 s. Un
+# chequeo que sólo mire `Type=wayland` no la ve durante todo ese rato y declara
+# la pantalla negra sobre un escritorio que estaba abriéndose.
+grep -q 'is-active --quiet greetd' airootfs/usr/local/bin/vasak-falta-escritorio 2>/dev/null \
+    && ok 'el chequeo distingue «tarda» de «se rindió»' \
+    || mal 'vasak-falta-escritorio no mira greetd: una sesión que todavía no es wayland le parece que no existe'
+
+# ---------------------------------------------------------------------------
 printf '\n'
 if [ "$fallos" -eq 0 ]; then
     printf '\033[32mTodo bien.\033[0m\n'

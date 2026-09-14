@@ -34,14 +34,44 @@ if command -v vasak-informe >/dev/null 2>&1; then
     vasak-informe "$INFORME" >/dev/null 2>&1 || true
 fi
 
+# # Lo que este guion NO hace, y por qué
+#
+# **No toca tty1 mientras greetd esté vivo.** `greetd.service` declara
+# `Conflicts=getty@tty1.service`, y en systemd un `Conflicts=` es **simétrico**:
+# arrancar el getty **detiene greetd**. No hay aviso, no hay error, y el
+# journal sólo dice «Stopping Greeter daemon» un renglón antes de «Started
+# Getty on tty1».
+#
+# Esa línea —un `systemctl start getty@tty1.service` sin guarda— fue lo que
+# dejó al ISO sin escritorio. La cadena, medida en el ISO del 14/09/2026:
+#
+#   51 s   greetd abre la sesión en vivo
+#   90 s   el temporizador dispara esta unidad
+#  114 s   el getty arranca y **greetd se detiene en el mismo segundo**
+#  137 s   es cuando la sesión habría pasado a `wayland`
+#
+# O sea que la red de seguridad producía la pantalla negra que venía a
+# explicar, veintitrés segundos antes de que el escritorio estuviera listo. Con
+# greetd enmascarado, ese mismo ISO arranca al escritorio completo.
+#
+# Así que la guarda no es una precaución, es la corrección: mientras greetd
+# esté activo, el escritorio sigue teniendo su chance y acá no hay nada que
+# hacer salvo dejar el informe escrito. Cuando se llega por el `OnFailure=`,
+# greetd ya está caído y la guarda no estorba — que es el caso para el que este
+# guion se escribió.
+if systemctl is-active --quiet greetd.service; then
+    printf 'greetd sigue activo: se deja el informe en %s y no se toca la consola.\n' "$INFORME"
+    exit 0
+fi
+
 # La consola de tty1 la había detenido greetd por su `Conflicts=`. Volverla a
-# levantar es lo que hace que haya dónde escribir y dónde trabajar.
+# levantar es lo que hace que haya dónde escribir y dónde trabajar. Acá ya es
+# seguro: greetd no está.
 systemctl start getty@tty1.service >/dev/null 2>&1 || true
 
-# Y traerla al frente. Acá sí corresponde: se llega a este guion cuando greetd
-# ya agotó sus reintentos, o sea que en el vt7 no va a aparecer nada. Cambiar de
-# consola cuando el escritorio todavía podría aparecer sería peor que la
-# pantalla negra.
+# Y traerla al frente. Acá sí corresponde: se llega a este punto con greetd
+# caído, o sea que en el vt7 no va a aparecer nada. Cambiar de consola cuando el
+# escritorio todavía podría aparecer sería peor que la pantalla negra.
 if command -v chvt >/dev/null 2>&1; then
     chvt 1 >/dev/null 2>&1 || true
 fi

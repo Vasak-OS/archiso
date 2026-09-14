@@ -18,15 +18,44 @@
 # arranque que funcionaba. Decir «sí hay» cuando no lo hay deja las cosas como
 # estaban, que es de donde venimos. Así que ante la duda, se calla.
 #
-# De ahí las dos concesiones:
+# De ahí las tres concesiones:
 #
 #   - Vale cualquier sesión del asiento que sea gráfica **o** del saludador. El
 #     saludador de greetd es lo que se ve mientras nadie entró, y declara su
 #     tipo según cómo lo hayan lanzado: mirar sólo `Type=wayland` lo dejaría
 #     afuera y el mensaje taparía una pantalla que estaba bien.
-#   - Se pregunta varias veces. A los noventa segundos greetd puede estar
-#     justo entre dos reintentos, y ese hueco dura menos de un segundo.
+#   - **Una sesión del asiento que todavía no es gráfica también cuenta**, y
+#     esta concesión es la que faltaba. La sesión en vivo la abre greetd por
+#     PAM y nace con `Type=tty`: recién pasa a `wayland` cuando el compositor
+#     se registra. Medido en el ISO del 14/09/2026 arrancando en una máquina
+#     virtual: la sesión aparece a los 51 s y no es `wayland` hasta los 137 s.
+#     O sea que durante ochenta y seis segundos hay una sesión viva, del
+#     asiento, abriendo el escritorio, y la versión anterior la contaba como
+#     «no hay nada».
+#   - Se pregunta varias veces, y durante bastante más de lo que tarda un
+#     arranque bueno. Ver `RONDAS`.
 set -u
+
+# Cuánto se mira antes de dar el escritorio por perdido.
+#
+# Doce rondas de cinco segundos: un minuto, encima de los noventa del
+# temporizador. El arranque más lento que se midió llegó a la sesión gráfica a
+# los 137 s, así que esto cubre hasta los 150 s y deja margen.
+#
+# Alargarlo sale barato —lo único que se retrasa es un mensaje de error— y
+# acortarlo sale carísimo, porque equivocarse acá fue lo que dejó al ISO sin
+# escritorio durante semanas.
+RONDAS=12
+PAUSA=5
+
+# Si greetd sigue vivo, todavía hay alguien intentando.
+#
+# No alcanza por sí solo —greetd puede quedarse activo con el saludador adentro
+# y la pantalla negra— pero sí sirve para no confundir «tarda» con «se rindió»,
+# que es de lo que se trata acá.
+sigue_intentando() {
+    systemctl is-active --quiet greetd.service
+}
 
 hay_algo() {
     local id datos
@@ -38,15 +67,20 @@ hay_algo() {
             *) continue ;;
         esac
         case "$datos" in
+            # Ya hay pantalla.
             *Type=wayland*|*Type=x11*|*Class=greeter*) return 0 ;;
         esac
+        # Hay una sesión del asiento que todavía no dice ser gráfica. Si greetd
+        # sigue en pie, es el escritorio abriéndose: la sesión nace `Type=tty` y
+        # cambia cuando el compositor se registra.
+        sigue_intentando && return 0
     done < <(loginctl list-sessions --no-legend 2>/dev/null)
     return 1
 }
 
-for _ in 1 2 3 4 5 6; do
+for _ in $(seq "$RONDAS"); do
     hay_algo && exit 1
-    sleep 3
+    sleep "$PAUSA"
 done
 
 exit 0
