@@ -181,6 +181,46 @@ grep -q 'is-active --quiet greetd' airootfs/usr/local/bin/vasak-falta-escritorio
     || mal 'vasak-falta-escritorio no mira greetd: una sesión que todavía no es wayland le parece que no existe'
 
 # ---------------------------------------------------------------------------
+tema 'El medio en vivo no paga el AppArmor del sistema instalado'
+
+# `apparmor.d` trae 734 perfiles y entra por `vasakos-desktop`, que es
+# dependencia dura: no se puede sacar de `packages.x86_64` porque no está ahí.
+# Lo que sí se puede es no cargarlos, que es de donde sale todo el costo.
+#
+# Medido en el ISO del 14/09/2026: `apparmor.service` se llevaba 40 s de un
+# arranque de 2 min 26 s, y cargar los perfiles generaba 1063 registros de
+# audit con contexto de sujeto — los mismos 1151 «error in audit_log_subj_ctx»
+# que dejaban la consola ilegible.
+#
+# El sistema instalado no se entera: lo arma `pacstrap` desde los repositorios
+# y nada de `airootfs/` llega ahí.
+[ -L airootfs/etc/systemd/system/apparmor.service ] \
+    && [ "$(readlink airootfs/etc/systemd/system/apparmor.service)" = /dev/null ] \
+    && ok 'apparmor.service va enmascarado en el medio en vivo' \
+    || mal 'apparmor.service no está enmascarado: el ISO vuelve a cargar 734 perfiles al arrancar'
+
+# `audit=0` en **todas** las entradas de arranque. Si queda una sin él, ese
+# camino arranca con la consola tapada por mil líneas del kernel, y es
+# justamente donde se lee el cartel de «no pudo abrir el escritorio».
+faltantes=0
+for entrada in syslinux/archiso_sys-linux.cfg syslinux/archiso_pxe-linux.cfg \
+               efiboot/loader/entries/01-archiso-x86_64-linux.conf \
+               efiboot/loader/entries/02-archiso-x86_64-speech-linux.conf \
+               efiboot/loader/entries/03-archiso-x86_64-ram-linux.conf; do
+    [ -f "$entrada" ] || continue
+    # Anclado al principio de la línea: `SYSAPPEND` de syslinux también
+    # contiene «APPEND» y no es una línea de kernel — contarla daba un fallo
+    # sobre dos entradas de PXE que estaban bien.
+    con_kernel=$(grep -cE '^[[:space:]]*(APPEND|options)[[:space:]]' "$entrada")
+    con_audit=$(grep -cE '^[[:space:]]*(APPEND|options)[[:space:]].*audit=0' "$entrada")
+    if [ "$con_kernel" -ne "$con_audit" ]; then
+        mal "audit=0 falta en $((con_kernel - con_audit)) entrada(s) de ${entrada}"
+        faltantes=$((faltantes + 1))
+    fi
+done
+[ "$faltantes" -eq 0 ] && ok 'audit=0 está en todas las entradas de arranque'
+
+# ---------------------------------------------------------------------------
 printf '\n'
 if [ "$fallos" -eq 0 ]; then
     printf '\033[32mTodo bien.\033[0m\n'
